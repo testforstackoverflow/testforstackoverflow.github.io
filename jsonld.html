@@ -1,0 +1,58 @@
+<html>
+<body>
+<label for="dropdown">Price:</label>
+<select id="dropdown">
+    <option value="0"></option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+</select>
+<!--BEGIN STRUCTURED DATA FOR CONFIGURABLE PRODUCT-->
+<script id="json-ld"
+        type="application/ld+json">
+{
+  "@context": "http://schema.org/",
+  "@type": "Product",
+  "name": "Configurable product name",
+  "image": [
+    "https://example.com/photos/photo.jpg"
+   ],
+  "description": "Configurable product",
+  "brand": {
+    "@type": "Thing",
+    "name": "Configurable product brand name"
+  },
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "EUR",
+    "price": "1",
+    "lowPrice": "1",
+    "highPrice": "3",
+    "offerCount": "3",
+    "itemCondition": "http://schema.org/NewCondition",
+    "availability": "http://schema.org/InStock"
+  }
+}
+</script>
+<!--END STRUCTURED DATA FOR CONFIGURABLE PRODUCT-->
+<!--BEGIN SCRIPT FOR CHANGING STRUCTURED DATA-->
+<script>
+  var dropdown = document.getElementById('dropdown');
+  var urlParams = new URLSearchParams(window.location.search);
+  window.addEventListener('load', function() {
+    dropdown.value = urlParams.get('p');
+    document.getElementById(
+        'json-ld').innerHTML = '{ "@context": "http://schema.org/", "@type": "Product", "name": "Simple product name", "image": [ "https://example.com/photos/photo.jpg" ], "description": "Simple product", "brand": { "@type": "Thing", "name": "Simple product brand name" }, "offers": { "@type": "Offer", "priceCurrency": "EUR", "price": "'
+        + urlParams.get('p')
+        + '", "itemCondition": "http://schema.org/NewCondition", "availability": "http://schema.org/OutOfStock" } }';
+  });
+  dropdown.addEventListener('change', function() {
+    document.getElementById(
+        'json-ld').innerHTML = '{ "@context": "http://schema.org/", "@type": "Product", "name": "Simple product name", "image": [ "https://example.com/photos/photo.jpg" ], "description": "Simple product", "brand": { "@type": "Thing", "name": "Simple product brand name" }, "offers": { "@type": "Offer", "priceCurrency": "EUR", "price": "'
+        + dropdown.value
+        + '", "itemCondition": "http://schema.org/NewCondition", "availability": "http://schema.org/OutOfStock" } }';
+  });
+</script>
+<!--END SCRIPT FOR CHANGING STRUCTURED DATA-->
+</body>
+</html>
