@@ -14,9 +14,7 @@
   "@context": "http://schema.org/",
   "@type": "Product",
   "name": "Configurable product name",
-  "image": [
-    "https://example.com/photos/photo.jpg"
-   ],
+  "image": ["https://example.com/photos/photo.jpg"],
   "description": "Configurable product",
   "brand": {
     "@type": "Thing",
@@ -35,22 +33,53 @@
 }
 </script>
 <!--END STRUCTURED DATA FOR CONFIGURABLE PRODUCT-->
+<pre id="structured-data">
+{
+  "@context": "http://schema.org/",
+  "@type": "Product",
+  "name": "Configurable product name",
+  "image": ["https://example.com/photos/photo.jpg"],
+  "description": "Configurable product",
+  "brand": {
+    "@type": "Thing",
+    "name": "Configurable product brand name"
+  },
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "EUR",
+    "price": "1",
+    "lowPrice": "1",
+    "highPrice": "3",
+    "offerCount": "3",
+    "itemCondition": "http://schema.org/NewCondition",
+    "availability": "http://schema.org/InStock"
+  }
+}
+</pre>
 <!--BEGIN SCRIPT FOR CHANGING STRUCTURED DATA-->
 <script>
   var dropdown = document.getElementById('dropdown');
   var urlParams = new URLSearchParams(window.location.search);
   window.addEventListener('load', function() {
     dropdown.value = urlParams.get('p');
-    document.getElementById(
-        'json-ld').innerHTML = '{ "@context": "http://schema.org/", "@type": "Product", "name": "Simple product name", "image": [ "https://example.com/photos/photo.jpg" ], "description": "Simple product", "brand": { "@type": "Thing", "name": "Simple product brand name" }, "offers": { "@type": "Offer", "priceCurrency": "EUR", "price": "'
+    var simpleProductStructuredData = '{\n  "@context": "http://schema.org/",\n  "@type": "Product", '
+        + '\n  "name": "Simple product name",\n  "image": [ "https://example.com/photos/photo.jpg" ],\n  "description": "Simple product",\n  "brand": {\n    "@type": "Thing", '
+        + '\n    "name": "Simple product brand name"\n  }, '
+        + '\n  "offers": {\n    "@type": "Offer",\n    "priceCurrency": "EUR",\n    "price": "'
         + urlParams.get('p')
-        + '", "itemCondition": "http://schema.org/NewCondition", "availability": "http://schema.org/OutOfStock" } }';
+        + '",\n    "itemCondition": "http://schema.org/NewCondition",\n    "availability": "http://schema.org/OutOfStock"\n  }\n}';
+    document.getElementById('json-ld').innerHTML = simpleProductStructuredData;
+    document.getElementById('structured-data').innerHTML = simpleProductStructuredData;
   });
   dropdown.addEventListener('change', function() {
-    document.getElementById(
-        'json-ld').innerHTML = '{ "@context": "http://schema.org/", "@type": "Product", "name": "Simple product name", "image": [ "https://example.com/photos/photo.jpg" ], "description": "Simple product", "brand": { "@type": "Thing", "name": "Simple product brand name" }, "offers": { "@type": "Offer", "priceCurrency": "EUR", "price": "'
+    var simpleProductStructuredData = '{\n  "@context": "http://schema.org/",\n  "@type": "Product", '
+        + '\n  "name": "Simple product name",\n  "image": [ "https://example.com/photos/photo.jpg" ],\n  "description": "Simple product",\n  "brand": {\n    "@type": "Thing", '
+        + '\n    "name": "Simple product brand name"\n  }, '
+        + '\n  "offers": {\n    "@type": "Offer",\n    "priceCurrency": "EUR",\n    "price": "'
         + dropdown.value
-        + '", "itemCondition": "http://schema.org/NewCondition", "availability": "http://schema.org/OutOfStock" } }';
+        + '",\n    "itemCondition": "http://schema.org/NewCondition",\n    "availability": "http://schema.org/OutOfStock"\n  }\n}';
+    document.getElementById('json-ld').innerHTML = simpleProductStructuredData;
+    document.getElementById('structured-data').innerHTML = simpleProductStructuredData;
   });
 </script>
 <!--END SCRIPT FOR CHANGING STRUCTURED DATA-->
